@@ -38,7 +38,7 @@ class Channel:
         :param other:
         :return: возвращает количество подписчиков двух каналов
         """
-        return self.subscriberCount + other.subscriberCount
+        return int(self.subscriberCount) + int(other.subscriberCount)
 
     def __sub__(self, other):
         """
