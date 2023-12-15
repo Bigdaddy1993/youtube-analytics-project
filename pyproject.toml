@@ -1,0 +1,52 @@
+[tool.poetry]
+name = "youtube-analytics-project"
+version = "0.1.0"
+description = ""
+authors = ["Roman Gerasimov <rgerasimov58@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+python-dotenv = "^1.0.0"
+requests = "^2.31.0"
+google-api-python-client = "^2.108.0"
+isodate = "^0.6.1"
+
+
+[tool.poetry.group.lint.dependencies]
+mypy = "^1.7.1"
+black = "^23.11.0"
+isort = "^5.12.0"
+flake8 = "^6.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.mypy]
+disallow_untyped_defs = true
+no_implicit_optional = true
+warn_return_any = true
+exclude = 'venv'
+
+[tool.black]
+line-length = 119
+exclude = '''
+(
+  /(
+      \.eggs         # исключить несколько общих каталогов в
+    | \.git          # корне проекта
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | dist
+  )/
+  | foo.py           # также отдельно исключить файл с именем foo.py в
+                     # корне проекта
+)
+'''
+
+[tool.isort]
+line_length = 119
