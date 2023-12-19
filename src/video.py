@@ -14,16 +14,24 @@ class Video:
     youtube = build("youtube", "v3", developerKey=api_key)
 
     def __init__(self, id_video: str):
-        self.id_video = id_video
-        self.video_response = (
-            self.youtube.videos()
-            .list(part="snippet,statistics,contentDetails,topicDetails", id=self.id_video)
-            .execute()
-        )
-        self.title = self.video_response["items"][0]["snippet"]["title"]
-        self.video_url = f"https://youtu.be/{self.id_video}"
-        self.video_view = self.video_response["items"][0]["statistics"]["viewCount"]
-        self.video_likes = self.video_response["items"][0]["statistics"]["likeCount"]
+        try:
+            self.id_video = id_video
+            self.video_response = (
+                self.youtube.videos()
+                .list(part="snippet,statistics,contentDetails,topicDetails", id=self.id_video)
+                .execute()
+            )
+            self.title = self.video_response["items"][0]["snippet"]["title"]
+            self.video_url = f"https://youtu.be/{self.id_video}"
+            self.video_view = self.video_response["items"][0]["statistics"]["viewCount"]
+            self.like_count = self.video_response["items"][0]["statistics"]["likeCount"]
+        except Exception:
+            self.id_video = "Не существует такого id"
+            self.video_response = None
+            self.title = None
+            self.video_url = None
+            self.video_view = None
+            self.like_count = None
 
     def __str__(self):
         """
@@ -37,6 +45,7 @@ class PLVideo(Video):
     """
     класс для плейлиста
     """
+
     def __init__(self, id_video: str, id_playlist: str):
         super().__init__(id_video)
         self.id_playlist = id_playlist

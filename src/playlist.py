@@ -60,7 +60,7 @@ class PlayList:
         for video_id in video_ids:
             video_info_dict = {}
             video_obj = Video(video_id)  # инициализация через класс Video
-            video_info_dict["likes"] = video_obj.video_likes
+            video_info_dict["likes"] = video_obj.like_count
             video_info_dict["url"] = video_obj.video_url
             list_with_video_info.append(video_info_dict)
         sorted_list = sorted(
